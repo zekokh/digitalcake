@@ -1,0 +1,296 @@
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        //Page date
+        var month = $("#month").val();
+        var number_of_day_in_month = new Date(2017, month, 0).getDate();
+        var input_text = ''; //день в дате заказа торта
+
+        $('#month').change(function () {
+            month = $("#month").val();
+            number_of_day_in_month = new Date(2017, month, 0).getDate();
+            //$('#date').val(number_of_day_in_month);
+            input_text = '';
+            $('#date').val(input_text);
+        });
+
+        btnNumber(1);
+        btnNumber(2);
+        btnNumber(3);
+        btnNumber(4);
+        btnNumber(5);
+        btnNumber(6);
+        btnNumber(7);
+        btnNumber(8);
+        btnNumber(9);
+        btnNumber(0);
+
+        $('#keypad_delete').click(function () {
+            if (input_text.length > 0) {
+                input_text = input_text.substring(0, input_text.length - 1);
+                $('#date').val(input_text);
+                $('#date').focus();
+            }
+            else {
+                $('#date').focus();
+            }
+        });
+        //end page date
+
+        //Page next
+        var step = 1;
+        $('#next').click(function () {
+            switch (step) {
+                case 1:
+                    nextDate();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+
+            }
+        });
+        //end page next
+
+        //Page shape
+
+        //end page shape
+
+
+        //Функция для нажатия цифр
+        function btnNumber(number) {
+            $('#keypad' + number).click(function () {
+                if (input_text.length < 2) {
+                    input_text = input_text + number
+                    if (parseInt(input_text) > number_of_day_in_month || parseInt(input_text) == 0 && input_text.length > 1) {
+                        input_text = number_of_day_in_month.toString();
+                        $('#date').val(number_of_day_in_month);
+                    }
+                    else {
+                        $('#date').val(input_text);
+                    }
+                }
+            });
+        }
+
+        //Функция проверки при переходе из страницы ВЫБОРА ДАТЫ
+        function nextDate() {
+            //Если дата состоит из одной цифры добавляем 0 перед числом, для приведения к виду 01
+            if (input_text.length == 1) {
+                input_text = "0" + input_text
+                $('#date').val(input_text);
+            }
+            //Дата заказа записанная в строку
+            var date_order = "2017." + month + "." + input_text
+
+            //Если дата не пустая
+            if (input_text.length > 0) {
+                var now = new Date();
+                var fullYearNow = now.getFullYear();
+                var monthNow = now.getMonth() + 1;
+                var dateNow = now.getDate();
+                var day_of_the_week = now.getDay();
+                var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                var date_of_order = new Date(2017, month - 1, input_text);
+                var difference_in_days = (date_of_order.valueOf() - today.valueOf()) / 86400000;
+
+                var week = [1, 2, 3, 4, 5, 6, 7];
+
+                //считаем рабочии дни
+                var days = 0;
+                var i = day_of_the_week - 1;
+                var count = 1;
+                while (count <= difference_in_days) {
+
+                    if (week[i] == 6 || week[i] == 7) {
+
+                    } else {
+                        days++;
+                    }
+                    count++;
+                    i++;
+                    if (i == 7) {
+                        i = 0
+                    }
+                }
+                console.log("Разница дней: " + difference_in_days);
+                console.log("Разница рабочих дней: " + days);
+                //программа не учитывает праздники только выходные дни
+
+                //Если дней меньше чем надо
+
+                if (days < 2) {
+                    msgShow("Загаловок", "Текст");
+                } else {
+                    $("#pageDate").animate({
+                        'margin-top': 300,
+                        opacity: 0
+
+                    }, 1000, function () {
+                        $("#pageDate").css('display', 'none');
+
+                        $("#pageTheme").css('display', 'block');
+                        $("#pageTheme").animate({
+                          opacity: 1
+
+                        }, 1000, function() {
+                            step = 2;
+                        });
+                    });
+
+
+                }
+
+            } else { //если дата пустая
+                msgShow("Загаловок", "Текст");
+            }
+        }
+
+        //end function nextDate
+
+
+      /* Зaкрытие мoдaльнoгo oкнa, тут делaем тo же сaмoе нo в oбрaтнoм пoрядке */
+        $('#modal_close, #overlay, #popup__btn').click(function () { // лoвим клик пo крестику или пoдлoжке
+            msgHide();
+        });
+
+        function msgShow(title, text) {
+            $('#overlay').fadeIn(400, // снaчaлa плaвнo пoкaзывaем темную пoдлoжку
+                function () { // пoсле выпoлнения предъидущей aнимaции
+                    $('#modal_form')
+                        .css('display', 'block') // убирaем у мoдaльнoгo oкнa display: none;
+                        .animate({opacity: 1, top: '50%'}, 200); // плaвнo прибaвляем прoзрaчнoсть oднoвременнo сo съезжaнием вниз
+                });
+        }
+
+        function msgHide() {
+            $('#modal_form')
+                .animate({opacity: 0, top: '45%'}, 200,  // плaвнo меняем прoзрaчнoсть нa 0 и oднoвременнo двигaем oкнo вверх
+                    function () { // пoсле aнимaции
+                        $(this).css('display', 'none'); // делaем ему display: none;
+                        $('#overlay').fadeOut(400); // скрывaем пoдлoжку
+                    }
+                );
+        }
+
+
+    });
+</script>
+<div class="header">
+  <div class="container">
+    <div class="col-md-6">
+      <h4 class="header-text"></h4>
+    </div>
+    <div class="col-md-6">
+      <h4 id="next" class="header-text header-text_right">ДАЛЕЕ</h4>
+    </div>
+  </div>
+</div>
+<div id="pageDate" class="container">
+  <!-- Модальное окно -->
+  <div id="modal_form"><!-- Сaмo oкнo -->
+    <!-- <span id="modal_close">X</span>  Кнoпкa зaкрыть -->
+    <div class="msg_title">Ой! Excusez moi :)</div>
+    <div class="msg_text">Нам нужно больше времени, что бы приготовить торт! <br> Если Вы закажите за 7 дней, то
+      получите 20% скидку!
+    </div>
+    <button id="popup__btn" class="popup__btn">Закрыть окно</button>
+  </div>
+  <div id="overlay"></div><!-- Пoдлoжкa -->
+  <!--
+  <div class="logo">
+    <%= image_tag "logo.png", id: 'logo' %>
+  </div> -->
+  <div class="page-date">
+    <div class="msg-box">
+      <h4 class="msg-box_date"> Когда торт должен быть готов?</h4>
+      <p class="msg-box_text">Вы можете заказать торт за 2 рабочих дня до торжества. Если заказ производится за 7
+        рабочих дней то Вы
+        получаете 20% скидку!</p>
+    </div>
+
+
+    <div class="box-container">
+      <h4 class="year">2017 год</h4>
+      <select id="month" class="month">
+        <!-- <option value="1">Январь</option>
+        <option value="2">Февраль</option> -->
+        <option value="3" selected>Март</option>
+        <option value="4">Апрель</option>
+        <option value="5">Май</option>
+        <option value="6">Июнь</option>
+        <option value="7">Июль</option>
+        <option value="8">Август</option>
+        <option value="9">Сентябрь</option>
+        <option value="10">Октябрь</option>
+        <option value="11">Ноябрь</option>
+        <option value="12">Декабрь</option>
+      </select>
+      <input class="date" id="date" placeholder="День" type="text">
+      <div class="numeric-keypad">
+        <div class="line-numeric">
+          <li id="keypad1" class="numeric">1</li>
+          <li id="keypad2" class="numeric">2</li>
+          <li id="keypad3" class="numeric">3</li>
+        </div>
+        <div class="line-numeric">
+          <li id="keypad4" class="numeric">4</li>
+          <li id="keypad5" class="numeric">5</li>
+          <li id="keypad6" class="numeric">6</li>
+        </div>
+        <div class="line-numeric">
+          <li id="keypad7" class="numeric">7</li>
+          <li id="keypad8" class="numeric">8</li>
+          <li id="keypad9" class="numeric">9</li>
+        </div>
+        <div class="line-numeric">
+          <li id="keypad0" class="numeric">0</li>
+          <li id="keypad_delete" class="numeric_delete">УДАЛИТЬ</li>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- Выбор темы -->
+<div id="pageTheme" class="container">
+  <!-- Модальное окно -->
+  <div id="modal_form"><!-- Сaмo oкнo -->
+    <!-- <span id="modal_close">X</span>  Кнoпкa зaкрыть -->
+    <div class="msg_title">Ой! Excusez moi :)</div>
+    <div class="msg_text">Нам нужно больше времени, что бы приготовить торт! <br> Если Вы закажите за 7 дней, то
+      получите 20% скидку!
+    </div>
+    <button id="popup__btn" class="popup__btn">Закрыть окно</button>
+  </div>
+  <div id="overlay"></div><!-- Пoдлoжкa -->
+  <!--
+  <div class="logo">
+    <%= image_tag "logo.png", id: 'logo' %>
+  </div> -->
+  <div class="page-theme">
+    <div class="msg-box">
+      <h4 class="msg-box_date"> Как хотите украсить торт?</h4>
+      <p class="msg-box_text"></p>
+    </div>
+    <div class="theme">
+      <%= image_tag "child.jpg", class: 'theme_img' %>
+      <h3>На свадьбу</h3>
+    </div>
+    <div class="theme">
+      <img src="" alt="">
+      <h3>На юбилей</h3>
+    </div>
+    <div class="theme">
+      <img src="" alt="">
+      <h3>На детский праздник</h3>
+    </div>
+    <div class="theme">
+      <img src="" alt="">
+      <h3>Торжество</h3>
+    </div>
+  </div>
+</div>
+  <!-- конец выбора темы -->

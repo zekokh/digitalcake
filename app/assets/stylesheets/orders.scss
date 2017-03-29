@@ -1,0 +1,233 @@
+// Place all the styles related to the orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+input[type="text"]:focus { outline: none; }
+body, main {
+  max-width: 1920px;
+  min-width: 320px;
+  margin: 0px;
+  background-color: #fafafa;
+}
+div, section {
+  padding: 0px;
+}
+button:active, button:focus {
+  outline: none;
+}
+button::-moz-focus-inner {
+  border: 0;
+}
+.header {
+  height: 65px;
+  background-color: #0277BD;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  margin-bottom: 45px;
+  padding-top: 5px;
+}
+.box {
+  height: 180px;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  cursor: pointer;
+  text-align: center;
+  color: #00bcd4;
+  padding-top: 78px;
+}
+
+.box:active {
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+.box_active {
+  background-color: #4dd0e1;
+  color: white;
+}
+.box-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 45px;
+}
+.logo {
+  width: 100%;
+  text-align: center;
+}
+#logo {
+  width: 200px;
+}
+.box-text {
+  font-size: 17pt;
+}
+#shape {
+  display: none;
+  opacity:0;
+}
+.header-text {
+  color: white;
+  font-size: 14pt;
+  margin-top: 10px;
+}
+.year {
+  display: inline-block;
+  font-size: 34pt;
+  margin-right: 40px;
+}
+.month {
+  width: 250px;
+  height: 80px;
+  font-size: 34pt;
+  margin-right: 40px;
+}
+.date {
+  width: 140px;
+  height: 80px;
+  font-size: 40pt;
+  border: 0;
+  outline: none;
+  text-align: center;
+}
+.line-numeric {
+  display: block;
+  margin-bottom: 10px;
+}
+.numeric-keypad {
+  margin-top: 35px;
+}
+.numeric {
+  cursor: pointer;
+  width: 95px;
+  height: 95px;
+  margin-right: 5px;
+  background-color: white;
+  display: inline-block;
+  padding-top: 20px;
+  font-size: 28pt;
+  border: 1px solid #01579B;
+  color: #0277BD;
+  //box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.numeric:active {
+  background-color: #01579B;
+  color: white;
+}
+.numeric_delete {
+  cursor: pointer;
+  width: 199px;
+  height: 95px;
+  margin-right: 5px;
+  color: #0277BD;
+  display: inline-block;
+  padding-top: 24px;
+  font-size: 25pt;
+  border: 1px solid #01579B;
+}
+.numeric_delete:active {
+  background-color: #01579B;
+  color: white;
+}
+.header-text_right {
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+}
+.msg-box {
+  width: 100%;
+  height: 115px;
+  text-align: center;
+  color: #31708f;
+  background-color: #d9edf7;
+  border: 1px solid #bce8f1;
+}
+.msg-box_date {
+  font-size: 28pt;
+  margin-top: 16px;
+}
+.msg-box_text {
+  font-size: 13pt;
+}
+//Модальное окно
+#modal_form {
+  width: 960px;
+  height: 340px; //Рaзмеры дoлжны быть фиксирoвaны
+  border-radius: 5px;
+  background: #fff;
+  position: fixed; // чтoбы oкнo былo в видимoй зoне в любoм месте
+  top: 45%; // oтступaем сверху 45%, oстaльные 5% пoдвинет скрипт
+  left: 50%; // пoлoвинa экрaнa слевa
+  margin-top: -150px;
+  margin-left: -460px; // тут вся мaгия центрoвки css, oтступaем влевo и вверх минус пoлoвину ширины и высoты сooтветственнo =)
+  display: none; // в oбычнoм сoстoянии oкнa не дoлжнo быть
+  opacity: 0; // пoлнoстью прoзрaчнo для aнимирoвaния
+  z-index: 7; // oкнo дoлжнo быть нaибoлее бoльшем слoе
+  padding: 45px 10px 20px 10px;
+  text-align: center;
+}
+/* Кнoпкa зaкрыть для тех ктo в тaнке) */
+#modal_form #modal_close {
+  width: 21px;
+  height: 21px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  display: block;
+}
+/* Пoдлoжкa */
+#overlay {
+  z-index:3; /* пoдлoжкa дoлжнa быть выше слoев элементoв сaйтa, нo ниже слoя мoдaльнoгo oкнa */
+  position:fixed; /* всегдa перекрывaет весь сaйт */
+  background-color:#000; /* чернaя */
+  opacity:0.8; /* нo немнoгo прoзрaчнa */
+  -moz-opacity:0.8; /* фикс прозрачности для старых браузеров */
+  filter:alpha(opacity=80);
+  width:100%;
+  height:100%; /* рaзмерoм вo весь экрaн */
+  top:0; /* сверху и слевa 0, oбязaтельные свoйствa! */
+  left:0;
+  cursor:pointer;
+  display:none; /* в oбычнoм сoстoянии её нет) */
+}
+/* Конец модального окна */
+.msg_title {
+  font-size: 32px;
+}
+.msg_text {
+  margin-top: 20px;
+  font-size: 28px;
+}
+.popup__btn {
+  cursor: pointer;
+  width: 270px;
+  height: 100px;
+  margin-right: 5px;
+  color: #0277BD;
+  display: inline-block;
+  padding-top: 0px;
+  font-size: 25pt;
+  border: 1px solid #01579B;
+  background-color: white;
+  margin-top: 28px;
+}
+.popup__btn:active {
+  background-color: #01579B;
+  color: white;
+}
+#pageTheme {
+  display: none;
+  opacity: 0;
+}
+.theme {
+  width: 300px;
+  height: 300px;
+  border: 1px solid #01579B;
+  background-color: white;
+  display: inline-block;
+  margin-top: 50px;
+  text-align: center;
+}
+.theme:active {
+  background-color: #01579B;
+  color: white;
+}
+.theme_img {
+  width: 100px;
+}
