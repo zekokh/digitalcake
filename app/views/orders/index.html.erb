@@ -1,9 +1,12 @@
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function () {
+        $('#date').val('');
         //Page date
         var month = $("#month").val();
         var number_of_day_in_month = new Date(2017, month, 0).getDate();
         var input_text = ''; //день в дате заказа торта
+        var theme = ''; //вид украшение торта
+
 
         $('#month').change(function () {
             month = $("#month").val();
@@ -51,6 +54,27 @@
             }
         });
         //end page next
+
+        //Page theme
+        $('#theme-wedding-div').click(function () {
+            theme = "На свадьбу";
+            nextTheme();
+            console.log("я в свадьбе");
+        });
+        $('#theme-bithday-div').click(function () {
+            theme = "Для любого торжества";
+            nextTheme();
+        });
+        $('#theme-child-div').click(function () {
+            theme = "На детский праздник";
+            nextTheme();
+        });
+        $('#theme-anniversary-div').click(function () {
+            theme = "На юбилей";
+            nextTheme();
+        });
+
+        //end page theme
 
         //Page shape
 
@@ -126,15 +150,21 @@
                         'margin-top': 300,
                         opacity: 0
 
-                    }, 1000, function () {
+                    }, 800, function () {
                         $("#pageDate").css('display', 'none');
 
                         $("#pageTheme").css('display', 'block');
                         $("#pageTheme").animate({
-                          opacity: 1
+                            opacity: 1
 
-                        }, 1000, function() {
+                        }, 800, function () {
                             step = 2;
+                            $("#next").animate({
+                                opacity: 0
+
+                            }, 300, function () {
+                                $("#next").css('display', 'none');
+                            });
                         });
                     });
 
@@ -148,6 +178,25 @@
 
         //end function nextDate
 
+        //nextTheme
+        function nextTheme() {
+            $("#pageTheme").animate({
+                'margin-top': 300,
+                opacity: 0
+
+            }, 800, function () {
+                $("#pageTheme").css('display', 'none');
+
+                $("#pageShape").css('display', 'block');
+                $("#pageShape").animate({
+                    opacity: 1
+
+                }, 800, function () {
+                    step = 3;
+                });
+            });
+        }
+        //end nextTheme
 
       /* Зaкрытие мoдaльнoгo oкнa, тут делaем тo же сaмoе нo в oбрaтнoм пoрядке */
         $('#modal_close, #overlay, #popup__btn').click(function () { // лoвим клик пo крестику или пoдлoжке
@@ -255,42 +304,79 @@
 </div>
 
 <!-- Выбор темы -->
-<div id="pageTheme" class="container">
-  <!-- Модальное окно -->
-  <div id="modal_form"><!-- Сaмo oкнo -->
-    <!-- <span id="modal_close">X</span>  Кнoпкa зaкрыть -->
-    <div class="msg_title">Ой! Excusez moi :)</div>
-    <div class="msg_text">Нам нужно больше времени, что бы приготовить торт! <br> Если Вы закажите за 7 дней, то
-      получите 20% скидку!
+  <div id="pageTheme" class="container">
+
+    <!--
+  <div class="logo">
+    <%= image_tag "logo.png", id: 'logo' %>
+  </div> -->
+    <div class="page-theme">
+      <div class="msg-box">
+        <h4 class="msg-box_date"> Как хотите украсить торт?</h4>
+        <p class="msg-box_text">Для продолжения нажмите на один из способов украшения торта указанных ниже!</p>
+      </div>
+      <div class="col-md-6">
+        <div id="theme-wedding-div" class="theme">
+          <%= image_tag "wedding.png", id: 'theme-wedding', class: 'theme_img' %>
+          <h3>На свадьбу</h3>
+        </div>
+        <div id="theme-bithday-div" class="theme">
+          <%= image_tag "bithday.png", id: 'theme-bithday', class: 'theme_img' %>
+          <img src="" alt="">
+          <h3>Для любого торжества</h3>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div id="theme-child-div" class="theme">
+          <%= image_tag "child.png", id: 'theme-child', class: 'theme_img' %>
+          <img src="" alt="">
+          <h3>На детский праздник</h3>
+        </div>
+        <div id="theme-anniversary-div" class="theme">
+          <%= image_tag "anniversary.png", id: 'theme-anniversary', class: 'theme_img' %>
+          <img src="" alt="">
+          <h3 class="theme-anniversary-title">На юбилей</h3>
+        </div>
+      </div>
     </div>
-    <button id="popup__btn" class="popup__btn">Закрыть окно</button>
-  </div>
-  <div id="overlay"></div><!-- Пoдлoжкa -->
+</div>
+<!-- конец выбора темы -->
+
+<!-- Выбор формы -->
+<div id="pageShape" class="container">
+
   <!--
   <div class="logo">
     <%= image_tag "logo.png", id: 'logo' %>
   </div> -->
   <div class="page-theme">
     <div class="msg-box">
-      <h4 class="msg-box_date"> Как хотите украсить торт?</h4>
-      <p class="msg-box_text"></p>
+      <h4 class="msg-box_date"> Какую хотите форму торта?</h4>
+      <p class="msg-box_text">Для продолжения нажмите на одну из форм торта указанную ниже!</p>
     </div>
-    <div class="theme">
-      <%= image_tag "child.jpg", class: 'theme_img' %>
-      <h3>На свадьбу</h3>
+    <div class="col-md-6">
+      <div class="shape">
+        <div class="circle_f4"></div>
+        <h3>Круг</h3>
+      </div>
+      <div class="shape">
+        <div class="circle_f3"></div>
+        <img src="" alt="">
+        <h3>Для любого торжества</h3>
+      </div>
     </div>
-    <div class="theme">
-      <img src="" alt="">
-      <h3>На юбилей</h3>
-    </div>
-    <div class="theme">
-      <img src="" alt="">
-      <h3>На детский праздник</h3>
-    </div>
-    <div class="theme">
-      <img src="" alt="">
-      <h3>Торжество</h3>
+    <div class="col-md-6">
+      <div class="shape">
+        <%= image_tag "child.png", id: 'theme-child', class: 'theme_img' %>
+        <img src="" alt="">
+        <h3>На детский праздник</h3>
+      </div>
+      <div class="shape">
+        <%= image_tag "anniversary.png", id: 'theme-anniversary', class: 'theme_img' %>
+        <img src="" alt="">
+        <h3 class="theme-anniversary-title">На юбилей</h3>
+      </div>
     </div>
   </div>
 </div>
-  <!-- конец выбора темы -->
+<!-- конец выбора формы -->
