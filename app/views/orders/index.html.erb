@@ -150,14 +150,14 @@
                         'margin-top': 300,
                         opacity: 0
 
-                    }, 800, function () {
+                    }, 1000, function () {
                         $("#pageDate").css('display', 'none');
 
                         $("#pageTheme").css('display', 'block');
                         $("#pageTheme").animate({
                             opacity: 1
 
-                        }, 800, function () {
+                        }, 1000, function () {
                             step = 2;
                             $("#next").animate({
                                 opacity: 0
@@ -184,14 +184,14 @@
                 'margin-top': 300,
                 opacity: 0
 
-            }, 800, function () {
+            }, 1000, function () {
                 $("#pageTheme").css('display', 'none');
 
                 $("#pageShape").css('display', 'block');
                 $("#pageShape").animate({
                     opacity: 1
 
-                }, 800, function () {
+                }, 1000, function () {
                     step = 3;
                 });
             });
@@ -354,7 +354,7 @@
       <h4 class="msg-box_date"> Какую хотите форму торта?</h4>
       <p class="msg-box_text">Для продолжения нажмите на одну из форм торта указанную ниже!</p>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="shape">
         <div class="circle_f4"></div>
         <h3>Круг</h3>
@@ -362,21 +362,30 @@
       <div class="shape">
         <div class="circle_f3"></div>
         <img src="" alt="">
-        <h3>Для любого торжества</h3>
+        <h3>Прямоугольник</h3>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="shape">
-        <%= image_tag "child.png", id: 'theme-child', class: 'theme_img' %>
+        <div class="circle_f3"></div>
         <img src="" alt="">
-        <h3>На детский праздник</h3>
+        <h3>Сердце</h3>
       </div>
       <div class="shape">
-        <%= image_tag "anniversary.png", id: 'theme-anniversary', class: 'theme_img' %>
+        <div class="circle_f3"></div>
         <img src="" alt="">
-        <h3 class="theme-anniversary-title">На юбилей</h3>
+        <h3>Облако</h3>
+      </div>
+
+    </div>
+    <div class="col-md-4">
+      <div class="shape">
+        <div class="circle_f3"></div>
+        <img src="" alt="">
+        <h3>Шестигранник</h3>
       </div>
     </div>
+
   </div>
 </div>
 <!-- конец выбора формы -->
