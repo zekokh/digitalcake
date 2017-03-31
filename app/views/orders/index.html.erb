@@ -6,6 +6,14 @@
         var number_of_day_in_month = new Date(2017, month, 0).getDate();
         var input_text = ''; //день в дате заказа торта
         var theme = ''; //вид украшение торта
+        var shapeCake = ''; //форма торта
+        var shapeCakeId = ''//id формы торта
+        var max_floor = ''; //максимальное количество этажей в торте
+        var floor_order = ''; //количество этажей в торте
+        var floor_now = 0; //текущее количество
+        var price_cake = 0; //цена за торт
+        var weight = 0; //вес торта
+        var difference_in_days = 0; //разница дней
 
 
         $('#month').change(function () {
@@ -59,7 +67,6 @@
         $('#theme-wedding-div').click(function () {
             theme = "На свадьбу";
             nextTheme();
-            console.log("я в свадьбе");
         });
         $('#theme-bithday-div').click(function () {
             theme = "Для любого торжества";
@@ -77,6 +84,31 @@
         //end page theme
 
         //Page shape
+        $('#shape-circle').click(function () {
+            shapeCake = "Круг";
+            shapeCakeId = "circle_f"
+
+            nextShape(shapeCakeId+"4");
+
+        });
+        $('#shape-rectangle').click(function () {
+            shapeCake = "Прямоугольник";
+            nextShape();
+        });
+        $('#shape-heart').click(function () {
+            shapeCake = "Сердце";
+            shapeCakeId = "heart_f"
+            nextShape(shapeCakeId+"2");
+        });
+        $('#shape-cloud').click(function () {
+            shapeCake = "Облако";
+            shapeCakeId = "cloud_f"
+            nextShape(shapeCakeId+"2");
+        });
+        $('#shape-hexahedron').click(function () {
+            shapeCake = "Шестигранник";
+            nextShape();
+        });
 
         //end page shape
 
@@ -116,7 +148,7 @@
                 var day_of_the_week = now.getDay();
                 var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
                 var date_of_order = new Date(2017, month - 1, input_text);
-                var difference_in_days = (date_of_order.valueOf() - today.valueOf()) / 86400000;
+                difference_in_days = (date_of_order.valueOf() - today.valueOf()) / 86400000;
 
                 var week = [1, 2, 3, 4, 5, 6, 7];
 
@@ -193,10 +225,122 @@
 
                 }, 1000, function () {
                     step = 3;
+                    console.log(theme);
                 });
             });
         }
+
         //end nextTheme
+
+        //nextShape
+        function nextShape(shapeCakeId) {
+            if (shapeCake == 'Круг' || shapeCake == 'Сердце' || shapeCake == 'Облако') {
+                $("#pageShape").animate({
+                    'margin-top': 300,
+                    opacity: 0
+
+                }, 1000, function () {
+                    $("#pageShape").css('display', 'none');
+                    $('#floor').addClass(shapeCakeId);
+                    switch (shapeCake) {
+                        case 'Круг':
+                            max_floor = 4;
+                            $('#floor_number').text(max_floor);
+                            break;
+                        case 'Сердце':
+                            max_floor = 2;
+                            $('#floor_number').text(max_floor);
+                            break;
+                        case 'Облако':
+                            max_floor = 2;
+                            $('#floor_number').text(max_floor);
+                            break;
+                    }
+                    floor_now = max_floor;
+
+                    changePriceAndWidth();
+
+
+
+                    $("#pageFloor").css('display', 'block');
+                    $("#pageFloor").animate({
+                        opacity: 1
+
+                    }, 1000, function () {
+                        step = 4;
+                        console.log(shapeCake);
+
+                    });
+                });
+            } else {
+                $("#pageShape").animate({
+                    'margin-top': 300,
+                    opacity: 0
+
+                }, 1000, function () {
+                    $("#pageShape").css('display', 'none');
+                    $("#pageInfo").css('display', 'block');
+                    $("#pageInfo").animate({
+                        opacity: 1
+
+                    }, 1000, function () {
+                        step = 5;
+
+                    });
+                });
+            }
+
+        }
+        //end nextShape
+
+
+        //Обработка количества ярусов
+        $('#less').click(function () {
+           if (floor_now > 1) {
+               floor_now = floor_now-1;
+               $('#floor_number').text(floor_now);
+               changeFloor(floor_now);
+               changePriceAndWidth();
+               console.log('меньше');
+           }
+        });
+        $('#more').click(function () {
+            if (floor_now < max_floor) {
+                floor_now = floor_now+1;
+                $('#floor_number').text(floor_now);
+                changeFloor(floor_now);
+                changePriceAndWidth();
+                console.log('больше');
+            }
+        });
+
+        function changeFloor(floor_now) {
+            switch (floor_now) {
+                case '4':
+                    weight = 7;
+                    break;
+                case '3':
+                    weight = 6.5;
+                    break;
+                case '2':
+                    weight = 5.5;
+                    break;
+                case '1':
+                    weight = 4.3;
+                    break;
+            }
+
+            if (difference_in_days >= 7) {
+                price_cake = 500*weight;
+            }else {
+                price_cake = 500*weight+(500*weight)*20;
+            }
+            $('#floor').removeClass( $('#floor').attr('class') );
+            $('#floor').addClass(shapeCakeId+""+floor_now);
+            $('#price_floor').text("Цена: "+price_cake+" Р.");
+
+        }
+        //конец выбора количества ярусов
 
       /* Зaкрытие мoдaльнoгo oкнa, тут делaем тo же сaмoе нo в oбрaтнoм пoрядке */
         $('#modal_close, #overlay, #popup__btn').click(function () { // лoвим клик пo крестику или пoдлoжке
@@ -222,20 +366,47 @@
                 );
         }
 
+        function changePriceAndWidth() {
+            switch (floor_now) {
+                case 4:
+                    weight = 7;
+                    break;
+                case 3:
+                    weight = 6.5;
+                    break;
+                case 2:
+                    weight = 5.5;
+                    break;
+                case 1:
+                    weight = 4.3;
+                    break;
+            }
+            console.log("Вес"+weight);
+            console.log("Этажей"+floor_now);
+            if (difference_in_days >= 7) {
+                price_cake = 500*weight;
+            }else {
+                price_cake = 500*weight+(500*weight)*20;
+            }
+
+            $('#price_floor').text("Цена: "+price_cake+" Р.");
+            $('#weight_floor').text("Цена: "+weight+" Р.");
+        }
 
     });
 </script>
 <div class="header">
   <div class="container">
     <div class="col-md-6">
-      <h4 class="header-text"></h4>
+      <h4 class="header-text"><a class="header-text" href="/orders">НАЧАТЬ СНАЧАЛО</a></h4>
     </div>
     <div class="col-md-6">
-      <h4 id="next" class="header-text header-text_right">ДАЛЕЕ</h4>
+      <!--  <h4 id="next" class="header-text header-text_right">ДАЛЕЕ</h4> -->
     </div>
   </div>
 </div>
 <div id="pageDate" class="container">
+  <div id="next" class="next">ДАЛЕЕ</div>
   <!-- Модальное окно -->
   <div id="modal_form"><!-- Сaмo oкнo -->
     <!-- <span id="modal_close">X</span>  Кнoпкa зaкрыть -->
@@ -263,9 +434,9 @@
       <h4 class="year">2017 год</h4>
       <select id="month" class="month">
         <!-- <option value="1">Январь</option>
-        <option value="2">Февраль</option> -->
-        <option value="3" selected>Март</option>
-        <option value="4">Апрель</option>
+        <option value="2">Февраль</option>
+        <option value="3" selected>Март</option> -->
+        <option value="4" selected>Апрель</option>
         <option value="5">Май</option>
         <option value="6">Июнь</option>
         <option value="7">Июль</option>
@@ -304,41 +475,41 @@
 </div>
 
 <!-- Выбор темы -->
-  <div id="pageTheme" class="container">
+<div id="pageTheme" class="container">
 
-    <!--
+  <!--
   <div class="logo">
     <%= image_tag "logo.png", id: 'logo' %>
   </div> -->
-    <div class="page-theme">
-      <div class="msg-box">
-        <h4 class="msg-box_date"> Как хотите украсить торт?</h4>
-        <p class="msg-box_text">Для продолжения нажмите на один из способов украшения торта указанных ниже!</p>
+  <div class="page-theme">
+    <div class="msg-box">
+      <h4 class="msg-box_date"> Как хотите украсить торт?</h4>
+      <p class="msg-box_text">Для продолжения нажмите на один из способов украшения торта указанных ниже!</p>
+    </div>
+    <div class="col-md-6">
+      <div id="theme-wedding-div" class="theme">
+        <%= image_tag "wedding.png", id: 'theme-wedding', class: 'theme_img' %>
+        <h3>На свадьбу</h3>
       </div>
-      <div class="col-md-6">
-        <div id="theme-wedding-div" class="theme">
-          <%= image_tag "wedding.png", id: 'theme-wedding', class: 'theme_img' %>
-          <h3>На свадьбу</h3>
-        </div>
-        <div id="theme-bithday-div" class="theme">
-          <%= image_tag "bithday.png", id: 'theme-bithday', class: 'theme_img' %>
-          <img src="" alt="">
-          <h3>Для любого торжества</h3>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div id="theme-child-div" class="theme">
-          <%= image_tag "child.png", id: 'theme-child', class: 'theme_img' %>
-          <img src="" alt="">
-          <h3>На детский праздник</h3>
-        </div>
-        <div id="theme-anniversary-div" class="theme">
-          <%= image_tag "anniversary.png", id: 'theme-anniversary', class: 'theme_img' %>
-          <img src="" alt="">
-          <h3 class="theme-anniversary-title">На юбилей</h3>
-        </div>
+      <div id="theme-bithday-div" class="theme">
+        <%= image_tag "bithday.png", id: 'theme-bithday', class: 'theme_img' %>
+        <img src="" alt="">
+        <h3>Для любого торжества</h3>
       </div>
     </div>
+    <div class="col-md-6">
+      <div id="theme-child-div" class="theme">
+        <%= image_tag "child.png", id: 'theme-child', class: 'theme_img' %>
+        <img src="" alt="">
+        <h3>На детский праздник</h3>
+      </div>
+      <div id="theme-anniversary-div" class="theme">
+        <%= image_tag "anniversary.png", id: 'theme-anniversary', class: 'theme_img' %>
+        <img src="" alt="">
+        <h3 class="theme-anniversary-title">На юбилей</h3>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- конец выбора темы -->
 
@@ -355,37 +526,70 @@
       <p class="msg-box_text">Для продолжения нажмите на одну из форм торта указанную ниже!</p>
     </div>
     <div class="col-md-4">
-      <div class="shape">
-        <div class="circle_f4"></div>
+      <div id="shape-circle" class="shape">
+        <div class="circle"></div>
         <h3>Круг</h3>
       </div>
-      <div class="shape">
-        <div class="circle_f3"></div>
+      <div id="shape-rectangle" class="shape">
+        <div class="rectangle"></div>
         <img src="" alt="">
         <h3>Прямоугольник</h3>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="shape">
-        <div class="circle_f3"></div>
+      <div id="shape-heart" class="shape">
+        <div class="heart"></div>
         <img src="" alt="">
         <h3>Сердце</h3>
       </div>
-      <div class="shape">
-        <div class="circle_f3"></div>
+      <div id="shape-cloud" class="shape">
+        <div class="cloud"></div>
         <img src="" alt="">
         <h3>Облако</h3>
       </div>
 
     </div>
     <div class="col-md-4">
-      <div class="shape">
-        <div class="circle_f3"></div>
+      <div id="shape-hexahedron" class="shape">
+        <div class="hexahedron"></div>
         <img src="" alt="">
         <h3>Шестигранник</h3>
       </div>
     </div>
 
+  </div>
+</div>
+<!-- конец выбора формы -->
+
+<!-- Выбор кол-во ярусов -->
+<div id="pageFloor" class="container">
+
+  <!--
+  <div class="logo">
+    <%= image_tag "logo.png", id: 'logo' %>
+  </div> -->
+  <div class="page-theme">
+    <div class="msg-box">
+      <h4 class="msg-box_date"> Выбирите количество ярусов на торте?</h4>
+      <p class="msg-box_text">Для продолжения нажмите кнопку "ДАЛЕЕ"!</p>
+    </div>
+
+    <div class="col-md-8">
+      <div class="shapeFloor">
+        <div id="floor" class=""></div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h4 id="price_floor" class="price_floor">Цена: 300 р.</h4>
+      <h4 class="w_floor">Вес: 300 р.</h4>
+
+      <div class="floor">
+        <h4 id="floor_number" class="floor_number"></h4>
+        <div id="less" class="less">МЕНЬШЕ</div>
+        <div id="more" class="more">БОЛЬШЕ</div>
+        <h4 class="floor_title">количество ярусов</h4>
+      </div>
+    </div>
   </div>
 </div>
 <!-- конец выбора формы -->
