@@ -386,11 +386,11 @@
             if (difference_in_days >= 7) {
                 price_cake = 500*weight;
             }else {
-                price_cake = 500*weight+(500*weight)*20;
+                price_cake = 500*weight+(500*weight)*0.2;
             }
 
             $('#price_floor').text("Цена: "+price_cake+" Р.");
-            $('#weight_floor').text("Цена: "+weight+" Р.");
+            $('#weight_floor').text("Вес: "+weight+" кг.");
         }
 
     });
@@ -580,8 +580,8 @@
       </div>
     </div>
     <div class="col-md-4">
-      <h4 id="price_floor" class="price_floor">Цена: 300 р.</h4>
-      <h4 class="w_floor">Вес: 300 р.</h4>
+      <h4 id="price_floor" class="price_floor"></h4>
+      <h4 id="weight_floor" class="weight_floor"></h4>
 
       <div class="floor">
         <h4 id="floor_number" class="floor_number"></h4>
