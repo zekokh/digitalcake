@@ -643,3 +643,15 @@ button::-moz-focus-inner {
   display: none;
   opacity: 0;
 }
+#info-msg-box {
+  height: 170px;
+}
+.info-container {
+  width: 100%;
+  text-align: left;
+  padding-left: 270px;
+  margin-top: 110px;
+  font-size: 27pt;
+  color: #2E2F30;
+  margin-bottom: 80px;
+}

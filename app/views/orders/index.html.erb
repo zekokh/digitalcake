@@ -5,6 +5,7 @@
         //Page date
         var month = $("#month").val();
         var number_of_day_in_month = new Date(2017, month, 0).getDate();
+        var date_order='';
         var input_text = ''; //день в дате заказа торта
         var theme = ''; //вид украшение торта
         var shapeCake = ''; //форма торта
@@ -21,7 +22,7 @@
         var name = '';//имя
         var phone = '';//переменная для ввода телефона клиента
         var phoneNumber = ''; //телефон клиента
-        var address ='';//Адрес
+        var address = '';//Адрес
 
 
         $('#month').change(function () {
@@ -101,6 +102,12 @@
         });
         $('#shape-rectangle').click(function () {
             shapeCake = "Прямоугольник";
+            weight = 3.3;
+            if (difference_in_days >= 7) {
+                price_cake = 625 * weight;
+            } else {
+                price_cake = 625 * weight + (625 * weight) * 20;
+            }
             nextShape();
         });
         $('#shape-heart').click(function () {
@@ -115,6 +122,12 @@
         });
         $('#shape-hexahedron').click(function () {
             shapeCake = "Шестигранник";
+            weight = 1.8;
+            if (difference_in_days >= 7) {
+                price_cake = 625 * weight;
+            } else {
+                price_cake = 625 * weight + (625 * weight) * 20;
+            }
             nextShape();
         });
 
@@ -166,7 +179,7 @@
                 $('#date').val(input_text);
             }
             //Дата заказа записанная в строку
-            var date_order = "2017." + month + "." + input_text
+            date_order = "2017." + month + "." + input_text;
 
             //Если дата не пустая
             if (input_text.length > 0) {
@@ -640,11 +653,11 @@
 
         $('#order_cancel').click(function () {
 
-            $("#btnAddress").animate({
+            $("#pageAddress").animate({
                 opacity: 0
 
             }, 1000, function () {
-                $("#btnAddress").css('display', 'none');
+                $("#pageAddress").css('display', 'none');
 
                 $("#pageInfo").css('display', 'block');
                 $("#pageInfo").animate({
@@ -653,6 +666,7 @@
                 }, 1000, function () {
                     step = 7;
                     //console.log(theme);
+                    pageInfo();
                 });
             });
 
@@ -772,7 +786,7 @@
             if (address.length > 0) {
                 address = address.substring(0, address.length - 1);
                 $('#address_text_area').val(address);
-               // $('#text_count_input').text("Кол-во символов: " + (30 - name.length));
+                // $('#text_count_input').text("Кол-во символов: " + (30 - name.length));
                 $('#address_text_area').focus();
             }
             else {
@@ -795,6 +809,7 @@
 
                     }, 1000, function () {
                         //step = 5;
+                        pageInfo();
                     });
                 });
 
@@ -813,6 +828,7 @@
 
                     }, 1000, function () {
                         //step = 5;
+                        pageInfo();
                     });
                 });
 
@@ -1062,6 +1078,30 @@
             $('#price_floor').text("Цена: " + price_cake + " Р.");
             $('#weight_floor').text("Вес: " + weight + " кг.");
         }
+
+        function pageInfo() {
+            if (nospace(name).length > 0) {
+                $('#infoName').text("Ваше Имя: " + name);
+            }
+            if (phoneNumber.length > 1) {
+                $('#infoPhone').text("Ваше телефон: " + phoneNumber);
+            }
+            $('#infoDate').text("Торт должен быть готов к: " + date_order);
+            $('#infoTheme').text("Украшение торта: " + theme);
+            $('#infoShape').text("Форма: " + shapeCake);
+            $('#infoFloor').text("Количество ярусов: " + floor_order);
+            $('#infoWedth').text("Вес: " + weight+ " кг.");
+
+            if (nospace(address).length > 5) {
+                $('#infoDelivery').text("Адрес доставки: " + address);
+                $('#infoPrice').text("Цена торта: " + price_cake+ "+ Доставка 450 Руб.");
+            } else {
+                $('#infoPrice').text("Цена торта: " + price_cake);
+            }
+
+
+        }
+
 
     });
 </script>
@@ -1551,10 +1591,11 @@
     <%= image_tag "logo.png", id: 'logo' %>
   </div> -->
   <div class="page-text">
-    <div id="name-msg-box" class="msg-box">
-      <h4 class="msg-box_date"> Вы заказали!</h4>
-      <p id="textAddreess" class="msg-box_text">Оз</p>
-      <div id="btnAddress" class="btn-msg-container">
+    <div id="info-msg-box" class="msg-box">
+      <h4 class="msg-box_date"> Проверьте Ваш заказ!</h4>
+      <p id="textAddreess" class="msg-box_text">Если что-то пошло не так необходимо заполнить информацию заного. Для
+        этого нажмите "начать с начало".</p>
+      <div class="info-container">
         <p id="infoName"></p>
         <p id="infoPhone"></p>
         <p id="infoDate"></p>
@@ -1565,8 +1606,9 @@
         <p id="infoWedth"></p>
         <p id="infoDelivery"></p>
         <p id="infoPrice"></p>
-        <div class="msg-box_btn" id="order_cancel">заказать</div>
+
       </div>
+      <div class="msg-box_btn" id="order_cancel">заказать</div>
     </div>
   </div>
 </div>
