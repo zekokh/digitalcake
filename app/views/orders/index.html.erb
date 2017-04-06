@@ -638,6 +638,26 @@
 
         });
 
+        $('#order_cancel').click(function () {
+
+            $("#btnAddress").animate({
+                opacity: 0
+
+            }, 1000, function () {
+                $("#btnAddress").css('display', 'none');
+
+                $("#pageInfo").css('display', 'block');
+                $("#pageInfo").animate({
+                    opacity: 1
+
+                }, 1000, function () {
+                    step = 7;
+                    //console.log(theme);
+                });
+            });
+
+        });
+
         //Keybord адрес
         $('#address1').click(function () {
             keybordAddress('Й');
@@ -763,11 +783,39 @@
             //переход на страницу вывода итоговой информации
 
             if (nospace(address).length > 0) {
+                $("#pageAddress").animate({
+                    'margin-top': 300,
+                    opacity: 0
 
+                }, 1000, function () {
+                    $("#pageAddress").css('display', 'none');
+                    $("#pageInfo").css('display', 'block');
+                    $("#pageInfo").animate({
+                        opacity: 1
 
+                    }, 1000, function () {
+                        //step = 5;
+                    });
+                });
 
             } else {
                 address = '';
+
+                $("#pageAddress").animate({
+                    'margin-top': 300,
+                    opacity: 0
+
+                }, 1000, function () {
+                    $("#pageAddress").css('display', 'none');
+                    $("#pageInfo").css('display', 'block');
+                    $("#pageInfo").animate({
+                        opacity: 1
+
+                    }, 1000, function () {
+                        //step = 5;
+                    });
+                });
+
             }
 
 
@@ -1507,8 +1555,17 @@
       <h4 class="msg-box_date"> Вы заказали!</h4>
       <p id="textAddreess" class="msg-box_text">Оз</p>
       <div id="btnAddress" class="btn-msg-container">
-        <p>Ваше имя:</p>
-
+        <p id="infoName"></p>
+        <p id="infoPhone"></p>
+        <p id="infoDate"></p>
+        <p id="infoTheme"></p>
+        <p id="infoShape"></p>
+        <p id="infoFloor"></p>
+        <p id="infoText"></p>
+        <p id="infoWedth"></p>
+        <p id="infoDelivery"></p>
+        <p id="infoPrice"></p>
+        <div class="msg-box_btn" id="order_cancel">заказать</div>
       </div>
     </div>
   </div>
