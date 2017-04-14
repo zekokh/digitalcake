@@ -2,6 +2,12 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+
+    respond_to do |format|
+      msg = { :status => "200", :message => "Success!" }
+      format.json  { render :json => msg }
+    end
+
     if @order.save
       #все гуд
       respond_to do |format|
