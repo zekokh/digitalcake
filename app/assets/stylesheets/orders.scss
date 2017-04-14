@@ -7,7 +7,7 @@ body, main {
   min-width: 320px;
   margin: 0px;
   background-color: #fafafa;
-  cursor: url(asset_path('cursor.png')), auto;
+  //cursor: url(asset_path('cursor.png')), auto;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -658,4 +658,7 @@ button::-moz-focus-inner {
 .reopen {
   width: 200px;
   height: 40px;
+}
+.table_toche tr {
+  height: 80px;
 }
