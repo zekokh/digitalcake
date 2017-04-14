@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(params[:name_of_app])
 
     respond_to do |format|
       msg = { :status => "200", :message => "Success!" }
