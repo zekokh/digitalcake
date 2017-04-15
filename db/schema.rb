@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170413152436) do
     t.boolean  "is_ready_cake"
     t.string   "ready_cake_time"
     t.boolean  "is_active"
+    t.string   "time_of_creation"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end

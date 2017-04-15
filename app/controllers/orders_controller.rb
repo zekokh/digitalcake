@@ -33,11 +33,8 @@ class OrdersController < ApplicationController
                               exists_in_the_factory: data['exists_in_the_factory'],
                               is_ready_cake: data['is_ready_cake'],
                               ready_cake_time: data['ready_cake_time'],
-                              is_active: data['is_active'])
-      end
-      respond_to do |format|
-        msg = { :status => "ok", :message => "Success!" }
-        format.json  { render :json => msg } # don't do msg.to_json
+                              is_active: data['is_active'],
+                              time_of_creation: data['time_of_creation'])
       end
 
     end
