@@ -10,7 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327090327) do
+ActiveRecord::Schema.define(version: 20170413152436) do
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "id_order"
+    t.string   "name_of_app"
+    t.string   "id_of_app"
+    t.string   "date"
+    t.string   "the_theme"
+    t.string   "the_shape"
+    t.string   "price_per_kilogram"
+    t.string   "weight"
+    t.string   "difference_in_days_without_days_off"
+    t.string   "difference_in_days_with_days_off"
+    t.string   "floor"
+    t.string   "price_for_shape_and_floor"
+    t.string   "insription"
+    t.string   "price_for_insription"
+    t.string   "name_of_customer"
+    t.string   "phone_of_customer"
+    t.boolean  "there_is_delivery"
+    t.string   "address"
+    t.boolean  "exists_in_the_store"
+    t.boolean  "exists_in_the_factory"
+    t.boolean  "is_ready_cake"
+    t.string   "ready_cake_time"
+    t.boolean  "is_active"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

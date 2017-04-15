@@ -40,34 +40,33 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td> <button type="button" class="btn btn-primary btn-lg">НАПЕЧАТАТЬ</button></td>
-      <td> <button type="button" class="btn btn-success btn-lg">ОПЛАТИЛ</button></td>
-      <td> <button type="button" class="btn btn-danger btn-lg">ОТМЕНИТЬ</button></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td> <button type="button" class="btn btn-primary btn-lg">НАПЕЧАТАТЬ</button></td>
-      <td> <button type="button" class="btn btn-success btn-lg">ОПЛАТИЛ</button></td>
-      <td> <button type="button" class="btn btn-danger btn-lg">ОТМЕНИТЬ</button></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <td> <button type="button" class="btn btn-primary btn-lg">НАПЕЧАТАТЬ</button></td>
-      <td> <button type="button" class="btn btn-success btn-lg">ОПЛАТИЛ</button></td>
-      <td> <button type="button" class="btn btn-danger btn-lg">ОТМЕНИТЬ</button></td>
-    </tr>
 
+    <% @orders.each do |order| %>
+    <tr>
+      <th scope="row"><%= order.id_order %></th>
+      <td><%= order.name_of_customer %></td>
+      <td><%= order.phone_of_customer %></td>
+      <td> <button type="button" class="btn btn-primary btn-lg">НАПЕЧАТАТЬ</button></td>
+      <td> <button type="button" class="btn btn-success btn-lg">ОПЛАТИЛ</button></td>
+      <td> <button type="button" class="btn btn-danger btn-lg">ОТМЕНИТЬ</button></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= order.id_order %></th>
+      <td><%= order.name_of_customer %></td>
+      <td><%= order.phone_of_customer %></td>
+      <td> <button type="button" class="btn btn-primary btn-lg">НАПЕЧАТАТЬ</button></td>
+      <td> <button type="button" class="btn btn-success btn-lg">ОПЛАТИЛ</button></td>
+      <td> <button type="button" class="btn btn-danger btn-lg">ОТМЕНИТЬ</button></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= order.id_order %></th>
+      <td><%= order.name_of_customer %></td>
+      <td><%= order.phone_of_customer %></td>
+      <td> <button type="button" class="btn btn-primary btn-lg">НАПЕЧАТАТЬ</button></td>
+      <td> <button type="button" class="btn btn-success btn-lg">ОПЛАТИЛ</button></td>
+      <td> <button type="button" class="btn btn-danger btn-lg">ОТМЕНИТЬ</button></td>
+    </tr>
+    <% end %>
 
     </tbody>
   </table>

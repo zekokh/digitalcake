@@ -1,6 +1,7 @@
 class CreateOrders < ActiveRecord::Migration[5.0]
   def change
     create_table :orders do |t|
+      t.string :id_order #id заказа номер заказа
       t.string :name_of_app #имя клиента приложения
       t.string :id_of_app #id клиента
       t.string :date #дата на какое надо что бы торт был гоотов
