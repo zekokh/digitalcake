@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
       end
 
     end
-
+      redirect_to orders_path
   end
 
 
