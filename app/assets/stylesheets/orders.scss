@@ -62,6 +62,10 @@ button::-moz-focus-inner {
 #logo {
   width: 200px;
 }
+.logo_container {
+  width: 100%;
+  text-align: center;
+}
 .box-text {
   font-size: 17pt;
 }
@@ -661,4 +665,16 @@ button::-moz-focus-inner {
 }
 .table_toche tr {
   height: 80px;
+}
+.signature {
+  margin-top: 100px;
+  text-align: right;
+}
+.print {
+  margin-top: -55px;
+  font-size: 14pt;
+}
+.rules {
+  margin-top: 50px;
+  font-size: 8pt;
 }
