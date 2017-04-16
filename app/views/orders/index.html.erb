@@ -1,4 +1,4 @@
-<!-- Fixed navbar -->
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -8,7 +8,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Жак-Андрэ</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -16,8 +15,8 @@
         <li><a href="#about">Статистика</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="../navbar-static-top/">Первомайская 193</a></li>
-        <li><a href="./">выйти <span class="sr-only">(current)</span></a></li>
+        <li><a href="#"><%= current_user.name %></a></li>
+        <li> <%= link_to 'выйти', session_url(current_user), method: 'delete' %></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -33,7 +32,7 @@
   <table class="table table_toche">
     <caption>
 <button type="button" class="btn btn-default btn-lg">ПЕРЕДАТЬ В ЦЕХ</button>
-      <br>
+      <br> <br>
       <form action="/get">
         <input class="btn btn-warning btn-lg" type="submit" value="ПРОВЕРИТЬ ЗАЯВКИ" />
       </form>
@@ -57,25 +56,23 @@
       <th scope="row"><%= order.id_order %></th>
       <td><%= order.name_of_customer %></td>
       <td><%= order.phone_of_customer %></td>
-      <td> <button type="button" class="btn btn-primary btn-lg">НАПЕЧАТАТЬ</button></td>
-      <td> <button type="button" class="btn btn-success btn-lg">ОПЛАТИЛ</button></td>
-      <td> <button type="button" class="btn btn-danger btn-lg">ОТМЕНИТЬ</button></td>
-    </tr>
-    <tr>
-      <th scope="row"><%= order.id_order %></th>
-      <td><%= order.name_of_customer %></td>
-      <td><%= order.phone_of_customer %></td>
-      <td> <button type="button" class="btn btn-primary btn-lg">НАПЕЧАТАТЬ</button></td>
-      <td> <button type="button" class="btn btn-success btn-lg">ОПЛАТИЛ</button></td>
-      <td> <button type="button" class="btn btn-danger btn-lg">ОТМЕНИТЬ</button></td>
-    </tr>
-    <tr>
-      <th scope="row"><%= order.id_order %></th>
-      <td><%= order.name_of_customer %></td>
-      <td><%= order.phone_of_customer %></td>
-      <td> <button type="button" class="btn btn-primary btn-lg">НАПЕЧАТАТЬ</button></td>
-      <td> <button type="button" class="btn btn-success btn-lg">ОПЛАТИЛ</button></td>
-      <td> <button type="button" class="btn btn-danger btn-lg">ОТМЕНИТЬ</button></td>
+      <td>
+
+        <form action="/print/<%= order.id %>">
+          <input class="btn btn-primary btn-lg" type="submit" value="НАПЕЧАТАТЬ" />
+        </form>
+        <%= link_to "PRINT", '#', class: "btn btn-primary btn-lg", onclick: "printpage()" %>
+      </td>
+      <td>
+        <form action="/pay/<%= order.id %>">
+          <input class="btn btn-success btn-lg" type="submit" value="ОПЛАТИЛ" />
+        </form>
+      </td>
+      <td>
+        <form action="/cancel/<%= order.id %>">
+          <input class="btn btn-danger btn-lg" type="submit" value="ОТМЕНА" />
+        </form>
+      </td>
     </tr>
     <% end %>
 
@@ -83,7 +80,7 @@
   </table>
 <% else %>
       <caption>Пока тут ничего нет.</caption>
-
+      <br> <br>
       <form action="/get">
         <input class="btn btn-default btn-lg" type="submit" value="ПРОВЕРИТЬ ЗАЯВКИ" />
       </form>

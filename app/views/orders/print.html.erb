@@ -1,0 +1,96 @@
+<script type="text/javascript" charset="utf-8">
+    $( document ).ready(function() {
+        window.print();
+
+        /*var win = window.open();
+        self.focus();
+        win.document.open();
+        win.document.write('<'+'html'+'><'+'body'+'>');
+        win.document.write(printThis);
+        win.document.write('<'+'/body'+'><'+'/html'+'>');
+        win.document.close();
+        win.print();
+        win.close(); */
+    });
+</script>
+<div class="container">
+  <br>
+
+  <br>
+  <form action="/orders">
+    <input class="btn btn-primary btn-lg" type="submit" value="Заказ" />
+  </form>
+  <br>
+
+  <br>
+  <table class="table">
+    <thead>
+    <tr>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+      <th><b>Номер заказ:</b></th>
+      <td><%= @order.id_order %></td>
+    </tr>
+    <tr>
+      <th><b>Имя:</b></th>
+      <td><%= @order.name_of_customer %></td>
+    </tr>
+    <tr>
+      <th>Телефон:</th>
+      <td><%= @order.phone_of_customer %></td>
+    </tr>
+    <tr>
+      <th>Дата:</th>
+      <td><%= @order.date %></td>
+    </tr>
+    <tr>
+      <th>Тема украшения:</th>
+      <td><%= @order.the_theme %></td>
+    </tr>
+    <% if @order.insription.length > 0 %>
+        <tr>
+          <th>Надпись на табличке:</th>
+          <td><%= @order.insription %></td>
+        </tr>
+    <% else %>
+        <tr>
+          <th>Надпись на табличке:</th>
+          <td>Без поздравительной надписи</td>
+        </tr>
+    <% end %>
+
+    <tr>
+      <th>Форма:</th>
+      <td><%= @order.the_shape %></td>
+    </tr>
+    <tr>
+      <th>Кол-во ярусов:</th>
+      <td><%= @order.floor %></td>
+    </tr>
+    <tr>
+      <th>Вес:</th>
+      <td><%= @order.weight %></td>
+    </tr>
+    <% if @order.address.length > 0 %>
+        <tr>
+          <th>Адресс доставки:</th>
+          <td><%= @order.the_theme %></td>
+        </tr>
+    <% else %>
+        <tr>
+          <th>Доставка:</th>
+          <td>Без доставки</td>
+        </tr>
+    <% end %>
+    <tr>
+      <th>Цена:</th>
+      <td><%= @order.price_for_shape_and_floor %> руб.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
