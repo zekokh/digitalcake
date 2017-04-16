@@ -24,7 +24,7 @@
 </nav>
 
 <div class="container">
-
+  <% if !@orders.blank? %>
   <table class="table table_toche">
     <caption>
 <button type="button" class="btn btn-default btn-lg">ПЕРЕДАТЬ В ЦЕХ</button></caption>
@@ -70,7 +70,9 @@
 
     </tbody>
   </table>
-
+<% else %>
+      <caption>Пока тут ничего нет.</caption>
+  <% end %>
 </div> <!-- /container -->
 
 
