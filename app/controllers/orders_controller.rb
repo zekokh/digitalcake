@@ -9,7 +9,8 @@ class OrdersController < ApplicationController
   def create
     begin
       json ||= JSON.parse(RestClient.get 'http://dc.zekoh.ru/get.php')
-      if json != null
+
+      if json != "null"
         json.each do |data|
           @order = Order.create(id_order: data['id'],
                                 name_of_app: data['name_of_app'],
