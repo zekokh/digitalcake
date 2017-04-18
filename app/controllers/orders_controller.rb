@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
 
   def create
     begin
-      json ||= JSON.parse(RestClient.get 'http://dc.zekoh.ru/get.php')
+      json ||= JSON.parse(RestClient.get "http://dc.zekoh.ru/get.php?app=#{current_user_id}")
       puts "тут важно"
       puts json
       if !json.to_s.empty?
