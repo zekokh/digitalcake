@@ -42,7 +42,7 @@
           <th>Имя</th>
           <th>Телефон</th>
           <th>Цена</th>
-          <th></th>
+          <th>Место продажи</th>
           <th></th>
 
         </tr>
@@ -70,6 +70,9 @@
                       <input class="btn btn-success btn-lg" type="submit" value="ЗАКАЗ ГОТОВ"/>
                     </form>
                 <% end %>
+              </td>
+              <td>
+                <%= order.name_of_app %>
               </td>
             </tr>
         <% end %>
