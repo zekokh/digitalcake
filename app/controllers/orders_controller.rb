@@ -2,7 +2,13 @@ class OrdersController < ApplicationController
   def index
     @client_id = User.find(current_user)
     #@orders = Order.where(id_of_app: @client_id)
-    @orders = Order.where(is_active: true, exists_in_the_store: true)
+
+    if current_user_id == 1
+      @orders = Order.where(is_active: true, exists_in_the_store: true)
+    else
+      @orders = Order.where(is_active: true, exists_in_the_store: true, id_of_app: current_user_id)
+    end
+
   end
 
   def create
@@ -55,7 +61,7 @@ class OrdersController < ApplicationController
 
   def pay
     order = Order.find(params[:id])
-    order.update(is_active: false, exists_in_the_store: false, exists_in_the_factory: true)
+    order.update( exists_in_the_store: false, exists_in_the_factory: true)
     order.save
 
     redirect_to orders_path, notice: 'Заявка оплачена и передана в цех!'

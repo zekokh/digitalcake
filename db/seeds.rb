@@ -8,3 +8,4 @@
 User.create(name: 'Руслан Зекох', login: 'ruslan', role: 'admin', password: '66c4e6fa3361e746620634353e6f15e3')
 User.create(name: 'Show Room', login: 'showroom', role: 'showroom', password: '66c4e6fa3361e746620634353e6f15e3')
 User.create(name: 'Магазин Жак-Андрэ', login: 'shop', role: 'shop', password: '66c4e6fa3361e746620634353e6f15e3')
+User.create(name: 'Цех Жак-Андрэ', login: 'factory', role: 'factory', password: '66c4e6fa3361e746620634353e6f15e3')

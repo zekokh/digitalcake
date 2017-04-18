@@ -17,8 +17,8 @@ class SessionsController < ApplicationController
           redirect_to orders_path
         when 'manufacture'
           redirect_to admin_index_path
-        when 'driver'
-          redirect_to admin_index_path
+        when 'factory'
+          redirect_to factory_path
         else
           redirect_to new_session_path, alert: "Проблема с ролью пользователя в системе!"
       end

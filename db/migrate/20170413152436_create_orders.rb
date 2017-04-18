@@ -25,6 +25,8 @@ class CreateOrders < ActiveRecord::Migration[5.0]
       t.string :ready_cake_time #дата готовности торта
       t.boolean :is_active #заказ не числиться в системе
       t.string :time_of_creation #время принятия заказа
+      t.boolean :extradition #заказ выдан
+      t.string :time_of_extradition #время выдачи заказа
 
           t.timestamps
     end

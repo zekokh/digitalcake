@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20170413152436) do
     t.string   "ready_cake_time"
     t.boolean  "is_active"
     t.string   "time_of_creation"
+    t.boolean  "extradition"
+    t.string   "time_of_extradition"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end

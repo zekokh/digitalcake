@@ -20,7 +20,7 @@
   </div>
   <br>
   <br>
-  <form action="/orders">
+  <form action="/factory">
     <input class="btn btn-primary btn-lg" type="submit" value="Заказ № <%= @order.id_order %>"/>
   </form>
   <br>
@@ -93,10 +93,6 @@
     </tbody>
   </table>
 
-  <div class="signature">
-    Дата заказа: <%= Date.today %> _________________________________ <br>
-    подпись &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </div>
 
   <% if @order.address.length > 0 %>
 
