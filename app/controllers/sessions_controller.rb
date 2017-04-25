@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   layout 'signin'
-  skip_before_action :user_signed_in?, except: :destroy
+  #skip_before_action :user_signed_in?, except: :destroy
 
   def new
   end
