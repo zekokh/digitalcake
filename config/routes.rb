@@ -16,6 +16,6 @@ Rails.application.routes.draw do
   get '/extradition/:id' => 'factory#extradition'
   get '/print_on_factory/:id' => 'factory#print'
 
-  match 'test', to: 'order#testPost', via: :post
+  match 'test', to: 'order#testpost', via: :post
 
 end

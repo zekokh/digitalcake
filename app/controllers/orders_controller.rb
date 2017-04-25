@@ -51,8 +51,9 @@ class OrdersController < ApplicationController
 
   end
 
-  def testPost
+  def testpost
     User.create(name: params[:name], login: params[:login], role: params[:role], password: params[:password]);
+    redirect_to orders_path, notice: 'test!'
   end
 
   def cancel
