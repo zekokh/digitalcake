@@ -9,10 +9,13 @@ Rails.application.routes.draw do
   get '/cancel/:id' => 'orders#cancel'
   get '/pay/:id' => 'orders#pay'
   get '/print/:id' => 'orders#print'
+  get '/web' => 'orders#web'
 
   get '/factory' => 'factory#index'
   get '/ready/:id' => 'factory#ready'
   get '/extradition/:id' => 'factory#extradition'
   get '/print_on_factory/:id' => 'factory#print'
+
+  match 'test', to: 'order#testPost', via: :post
 
 end

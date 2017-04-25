@@ -14,3 +14,6 @@ Rails.application.config.assets.precompile += %w( signin.css )
 Rails.application.config.assets.precompile += %w( inputmask.js )
 Rails.application.config.assets.precompile += %w( fixed-top-bar.css )
 
+Rails.application.config.assets.precompile += %w( jquery-ui.min.css )
+Rails.application.config.assets.precompile += %w( jquery-ui.min.js )
+
