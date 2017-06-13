@@ -1,14 +1,32 @@
 <!-- Стили datepicker -->
 <link href=<%= asset_path 'jquery-ui.min.css' %> rel="stylesheet">
-<script src=<%= asset_path 'inputmask.js'%>></script>
+<script src=<%= asset_path 'inputmask.js' %>></script>
 
-<script src=<%= asset_path 'jquery-ui.min.js'%>></script>
+<script src=<%= asset_path 'jquery-ui.min.js' %>></script>
 
 <script type="text/javascript" charset="utf-8">
+    $.datepicker.regional['ru'] = {
+        closeText: 'Закрыть',
+        prevText: '&#x3c;Пред',
+        nextText: 'След&#x3e;',
+        currentText: 'Сегодня',
+        monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+            'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+        monthNamesShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн',
+            'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+        dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
+        dayNamesShort: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],
+        dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+        dateFormat: 'dd.mm.yy',
+        firstDay: 1,
+        isRTL: false
+    };
+    $.datepicker.setDefaults($.datepicker.regional['ru']);
     $(document).ready(function () {
         //$('#datepicker').setDefaults( $.datepicker.regional[ "ru" ] );
-        $.datepicker.defaults = {regional:"ru"};
-        $( "#datepicker" ).datepicker();
+//        $.datepicker.defaults = {regional:"ru"};
+        $("#datepicker").datepicker();
+
 
     });
 </script>
@@ -35,11 +53,68 @@
   </div>
 </nav>
 
-<div class="container">
-  <h5>Выбирите дату, когда торт должен быть готов:</h5>
-  <div id="datepicker" class="datepicker">
-
+<div class="container center">
+  <h4>Выбирите дату, когда торт должен быть готов:</h4>
+  <br>
+  <div class="col-md-12 center">
+    <div id="datepicker" class="datepicker">
+    </div>
+    <br> <br> <br>
   </div>
+
+  <h4>Выбирите тему украшения:</h4>
+  <br>
+  <div class="col-md-6">
+    <div class="img_theme">
+      <%= image_tag "anniversary.jpg", id: 'theme-wedding' %>
+    </div>
+
+    <br>
+    <h5>Выбирите тему украшения:</h5>
+  </div>
+
+
+  <div class="col-md-6">
+    <div class="img_theme">
+      <%= image_tag "bithday.jpg", id: 'theme-wedding' %>
+    </div>
+
+    <br>
+    <h5>Выбирите тему украшения:</h5>
+  </div>
+  <div class="col-md-6">
+    <div class="img_theme">
+      <%= image_tag "child.jpg", id: 'theme-wedding' %>
+    </div>
+
+    <br>
+    <h5>Выбирите тему украшения:</h5>
+  </div>
+  <div class="col-md-6">
+    <div class="img_theme">
+    <%= image_tag "wedding.jpg", id: 'theme-wedding' %>
+    </div>
+    <br>
+    <h5>Выбирите тему украшения:</h5>
+  </div>
+  <div class="col-md-12">
+    <h5>Надпись на табличке:</h5>
+    <input type="text" placeholder="">
+  </div>
+  <div class="col-md-12">
+    <h5>Имя клиента:</h5>
+    <input type="text" placeholder="">
+  </div>
+  <div class="col-md-12">
+    <h5>Телефон:</h5>
+    <input type="text" placeholder="">
+  </div>
+  <div class="col-md-12">
+    <h5>Доставка:</h5>
+    <input type="text" placeholder="">
+  </div>
+
+
 </div> <!-- /container -->
 </div>
 <!-- Bootstrap core JavaScript

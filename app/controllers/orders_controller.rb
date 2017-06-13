@@ -8,7 +8,6 @@ class OrdersController < ApplicationController
     else
       @orders = Order.where(is_active: true, exists_in_the_store: true, id_of_app: current_user_id)
     end
-
   end
 
   def create
