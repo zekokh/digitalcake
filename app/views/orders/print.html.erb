@@ -1,7 +1,7 @@
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function () {
         window.print();
-        window.close();
+        //window.close();
 
       /*var win = window.open();
        self.focus();
@@ -88,7 +88,7 @@
     <% end %>
     <tr>
       <th>Цена:</th>
-
+      <td><%= @order.price_for_shape_and_floor.to_i + @order.price_for_insription.to_i + @price_for_delivery + 200%> руб.</td>
     </tr>
     </tbody>
   </table>
