@@ -69,6 +69,12 @@ class OrdersController < ApplicationController
 
   def print
     @order = Order.find(params[:id])
+    if @order.there_is_delivery?
+      @price_for_delivery = 450
+    else
+      @price_for_delivery = 0
+    end
+
   end
 
   def order_params
